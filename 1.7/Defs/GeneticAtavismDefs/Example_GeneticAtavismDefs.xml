@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<!--
+  Fields:
+    requiredGene    - the gene the mother must have active. Optional if sourceXenotype is set.
+    sourceXenotype  - the xenotype the mother must be. Optional if requiredGene is set.
+    targetXenotype  - what the baby is born as. Required.
+    chance          - 0 to 1. A def with chance 1 acts as a guaranteed fallback.
+    InheritanceMode - none | excess | endo | xeno | all
+    order           - optional. Lower rolls first; defaults to 0.
+
+  How multiple defs resolve:
+    Every def that matches the mother is rolled in turn, lowest order first, and
+    the first one to pass its chance wins. Nothing else is rolled after that. If
+    every def misses, the birth falls through to the normal game behaviour.
+
+    Defs that leave "order" unset all sit at 0 and keep their XML order, so
+    listing them in the sequence you want is enough within a single file. Set
+    "order" explicitly when defs come from more than one file or mod, since load
+    order is not something you can rely on across files.
+
+    A guaranteed fallback is just the last def in the sequence with chance 1:
+
+      <order>0</order> <chance>0.05</chance>  -> tried first
+      <order>1</order> <chance>0.05</chance>  -> tried if the above missed
+      <order>2</order> <chance>1</chance>     -> always taken if both missed
+-->
+
+<!-- <AtavismLibraries.GeneticAtavismDef>
+    <defName>Pigskin_to_Baseliner</defName>
+    <requiredGene>Nose_Pig</requiredGene>
+    <sourceXenotype>Pigskin</sourceXenotype>
+    <targetXenotype>Baseliner</targetXenotype>
+    <chance>0.05</chance>
+    <InheritanceMode>none</InheritanceMode>
+  </AtavismLibraries.GeneticAtavismDef>
+
+  <AtavismLibraries.GeneticAtavismDef>
+    <defName>Sanguophage_To_yttakin</defName>
+    <requiredGene>Hemogenic</requiredGene>
+    <sourceXenotype>Sanguophage</sourceXenotype>
+    <targetXenotype>Yttakin</targetXenotype>
+    <chance>1</chance>
+    <InheritanceMode>xeno</InheritanceMode>
+  </AtavismLibraries.GeneticAtavismDef> -->
+</Defs>

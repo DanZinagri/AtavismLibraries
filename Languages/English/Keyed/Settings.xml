@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    <AtavismTitle>{0} born</AtavismTitle>
+    <AtavismLoc>{0_nameDef} has given birth to a {1}</AtavismLoc>
+
+    <Atavism_SettingsCategory>Atavism Libraries</Atavism_SettingsCategory>
+    <Atavism_UseBGI>Use Better Gene Inheritance for parent genes</Atavism_UseBGI>
+    <Atavism_UseBGIDesc>When an atavism def passes a full parent gene set on to the baby (the "endo" and "all" inheritance modes), ask Better Gene Inheritance to mix the parents rather than using the gene set the pregnancy already stored.\n\nEither way the baby's xenotype is still the one the atavism def names.</Atavism_UseBGIDesc>
+    <Atavism_BGINotLoaded>Better Gene Inheritance is not loaded, so there is nothing to configure here.</Atavism_BGINotLoaded>
+</LanguageData>
