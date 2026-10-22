@@ -69,6 +69,29 @@ namespace AtavismLibraries
         }
 
 
+        // Announces an atavism birth or hatching. Skipped when the baby simply is
+        // its mother's xenotype: a def that keeps a lineage pure (source and target
+        // the same) is not an atavism worth a letter on every birth.
+        // The faction check mirrors ChoiceLetter_GeneticAtavism.CanShowInLetterStack.
+        // Without it, every enemy or visitor birth still built a letter that could
+        // never be shown and went straight to the archive.
+        public static void TrySendAtavismLetter(Pawn baby, Pawn mother, XenotypeDef target)
+        {
+            if (baby == null || mother == null || target == null || baby.Faction?.IsPlayer != true)
+                return;
+
+            if (mother.genes?.Xenotype == target)
+                return;
+
+            ChoiceLetter_GeneticAtavism letter = (ChoiceLetter_GeneticAtavism)LetterMaker.MakeLetter(
+                "AtavismTitle".Translate(target.label),
+                "AtavismLoc".Translate(mother, target.label),
+                Atavism_DefOf.GetAtavismLetter(),
+                baby);
+            letter.Start();
+            Find.LetterStack.ReceiveLetter(letter);
+        }
+
         //A bunch of utility methods to avoid code duplication
         public static bool HasActiveGene(Pawn pawn, GeneDef geneDef)
         {

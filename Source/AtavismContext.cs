@@ -1,13 +1,15 @@
 using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace AtavismLibraries
 {
     // The birth currently being resolved.
     //
-    // Opened by Patch_PregnancyUtility_ApplyBirthOutcome and always
-    // closed again by its finalizer, so a throw partway through pawn generation
-    // cannot leak the mother onto the next pawn generated anywhere in the game.
+    // Opened by Patch_PregnancyUtility_ApplyBirthOutcome (live births) or by
+    // EggHatchCompat (VEF and VRE Saurid eggs), and always closed again by that
+    // patch's finalizer, so a throw partway through pawn generation cannot leak
+    // the mother onto the next pawn generated anywhere in the game.
     public static class AtavismContext
     {
         private static int resolvingGenesDepth;
@@ -17,6 +19,19 @@ namespace AtavismLibraries
         public static Pawn Father { get; private set; }
 
         public static GeneticAtavismDef Def { get; private set; }
+
+        // Parent gene mix for births whose generation request carries no gene
+        // list of its own (VEF egg hatching). Null for live births, which hand
+        // the list over in the request.
+        public static List<GeneDef> ParentGenes { get; private set; }
+
+        // The pawn the atavism was applied to, once generated.
+        public static Pawn Baby { get; private set; }
+
+        public static void RecordBaby(Pawn baby)
+        {
+            Baby = baby;
+        }
 
         // True once the baby's generation request has been rewritten.
         public static bool Applied { get; private set; }
@@ -46,11 +61,13 @@ namespace AtavismLibraries
             }
         }
 
-        public static void Open(Pawn mother, Pawn father, GeneticAtavismDef def)
+        public static void Open(Pawn mother, Pawn father, GeneticAtavismDef def, List<GeneDef> parentGenes = null)
         {
             Mother = mother;
             Father = father;
             Def = def;
+            ParentGenes = parentGenes;
+            Baby = null;
             Applied = false;
         }
 
@@ -61,6 +78,8 @@ namespace AtavismLibraries
             Mother = null;
             Father = null;
             Def = null;
+            ParentGenes = null;
+            Baby = null;
             Applied = false;
         }
 

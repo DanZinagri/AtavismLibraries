@@ -8,5 +8,6 @@ public static class HarmonyInit
     static HarmonyInit()
     {
         AtavismMod.Harm.PatchAll();
+        EggHatchCompat.Apply(AtavismMod.Harm);
     }
 }

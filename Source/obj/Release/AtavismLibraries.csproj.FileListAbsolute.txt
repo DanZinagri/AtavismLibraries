@@ -1,0 +1,5 @@
+C:\Users\DanZinagri\Documents\RimWorldProjects\AtavismLibraries\1.7\Assemblies\AtavismLibraries.dll
+C:\Users\DanZinagri\Documents\RimWorldProjects\AtavismLibraries\Source\obj\Release\AtavismLibraries.csproj.AssemblyReference.cache
+C:\Users\DanZinagri\Documents\RimWorldProjects\AtavismLibraries\Source\obj\Release\AtavismLibraries.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DanZinagri\Documents\RimWorldProjects\AtavismLibraries\Source\obj\Release\AtavismLibraries.csproj.CoreCompileInputs.cache
+C:\Users\DanZinagri\Documents\RimWorldProjects\AtavismLibraries\Source\obj\Release\AtavismLibraries.dll

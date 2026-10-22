@@ -53,19 +53,10 @@ namespace AtavismLibraries
             baby.genes.iconDef = null;
             baby.genes.hybrid = false;
 
-            // The faction check mirrors ChoiceLetter_GeneticAtavism.CanShowInLetterStack.
-            // Without it, every enemy or visitor birth still built a letter that
-            // could never be shown and went straight to the archive.
-            if (preventLetter || baby.Faction?.IsPlayer != true)
-                return;
-
-            ChoiceLetter_GeneticAtavism letter = (ChoiceLetter_GeneticAtavism)LetterMaker.MakeLetter(
-                "AtavismTitle".Translate(target.label),
-                "AtavismLoc".Translate(mother, target.label),
-                Atavism_DefOf.GetAtavismLetter(),
-                baby);
-            letter.Start();
-            Find.LetterStack.ReceiveLetter(letter);
+            if (!preventLetter)
+            {
+                AtavismUtils.TrySendAtavismLetter(baby, mother, target);
+            }
         }
 
         //A finalizer runs even when the birth throws, which a postfix does not.
